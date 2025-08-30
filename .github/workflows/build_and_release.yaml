@@ -1,0 +1,24 @@
+# name
+name: build_countingbook_app
+
+# trigger
+on:
+  - push
+
+# one or more jobs which are run sequentially.
+jobs:
+  build_app:
+    runs-on: ubuntu-latest
+    steps:
+      - id: s01
+        # running some shell bash command
+        run: echo "github ${{ github.ref_name}}"
+      - run: echo "before " && ls -l
+        # set up the environment
+      - id: s02
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - id: s03
+        uses: actions/checkout@v5
+      - run: echo "after " && ls -l
